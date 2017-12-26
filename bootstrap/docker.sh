@@ -28,22 +28,3 @@ sudo chmod +x /usr/local/bin/docker-compose
 # download docker-compose-wrapper and make executable
 sudo curl -L https://raw.githubusercontent.com/chrisipa/docker-compose-wrapper/master/docker-compose-wrapper -o /usr/local/bin/docker-compose-wrapper
 sudo chmod +x /usr/local/bin/docker-compose-wrapper
-
-# create folder
-sudo mkdir -p /opt/lets-chat/config
-sudo mkdir -p /opt/lpsk
-sudo mkdir -p /opt/teamspeak
-
-# create teamspeak folder
-sudo chown -R 503.503 /opt/teamspeak
-
-# move files to folder
-sudo mv ~/settings.yml /opt/lets-chat/config
-sudo mv ~/docker-compose.yml /opt/lpsk
-sudo mv ~/lpsk /etc/init.d/lpsk
-
-# register init script
-sudo update-rc.d lpsk defaults
-
-# start init script
-sudo service lpsk update

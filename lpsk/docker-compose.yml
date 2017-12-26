@@ -33,9 +33,9 @@ teamspeak:
 samba:
   image: dperson/samba:latest
   volumes:
-    - /tmp:/share
-    - /tmp:/games
+    - /share:/share
+    - /exchange:/exchange
   ports:
     - 139:139
     - 445:445
-  command: -s "share;/share;yes;no;yes" -s "games;/games;yes;yes;yes"
+  command: -s "share;/share;yes;yes;yes" -s "exchange;/exchange;yes;no;yes" 

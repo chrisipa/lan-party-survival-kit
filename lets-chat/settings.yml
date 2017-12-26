@@ -15,3 +15,11 @@ files:
   provider: local
   maxFileSize: 1000000000
   restrictTypes: false
+
+xmpp:
+  enable: true
+  roomCreation: true
+  debug:
+    handled: false
+    unhandled: false
+  port: 5222  
