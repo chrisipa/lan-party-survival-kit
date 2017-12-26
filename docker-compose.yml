@@ -1,0 +1,41 @@
+lets-chat:
+  image: sdelements/lets-chat:0.4.7
+  links:
+    - mongo
+  ports:
+    - 8080:8080
+    - 5222:5222
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
+    - /opt/lets-chat/config/settings.yml:/usr/src/app/settings.yml:ro
+
+mongo:
+  image: mongo:3.4.10
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
+    - /opt/lets-chat/backup:/backup
+    - /opt/lets-chat/data:/data/db
+  ports:
+    - 27017:27017
+
+teamspeak:
+  image: mbentley/teamspeak:latest
+  volumes:
+    - /opt/teamspeak:/data
+  ports:
+    - 9987:9987/udp
+    - 10011:10011
+    - 30033:30033
+    - 41144:41144 
+
+samba:
+  image: dperson/samba:latest
+  volumes:
+    - /tmp:/share
+    - /tmp:/games
+  ports:
+    - 139:139
+    - 445:445
+  command: -s "share;/share;yes;no;yes" -s "games;/games;yes;yes;yes"

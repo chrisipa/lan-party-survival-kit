@@ -1,0 +1,17 @@
+auth:
+  providers: [local]
+
+  local:
+    enableRegistration: true
+    passwordRegex: ^.{8,64}$
+
+private:
+  enable: true
+  roster: online # online / all
+  expire: 360 # false or number of minutes
+
+files:
+  enable: true
+  provider: local
+  maxFileSize: 1000000000
+  restrictTypes: false
