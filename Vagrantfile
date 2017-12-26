@@ -28,8 +28,9 @@ Vagrant.configure("2") do |config|
 
   # copy files to vm
   config.vm.provision "file", source: "lpsk/init/lpsk", destination: "/tmp/lpsk"
+  config.vm.provision "file", source: "lpsk/index.html", destination: "/tmp/index.html"
+  config.vm.provision "file", source: "lpsk/docker-compose.yml", destination: "/tmp/docker-compose.yml"  
   config.vm.provision "file", source: "lets-chat/settings.yml", destination: "/tmp/settings.yml"
-  config.vm.provision "file", source: "lpsk/docker-compose.yml", destination: "/tmp/docker-compose.yml"
 
   # execute shell scripts in vm
   config.vm.provision "shell", path: "bootstrap/inputrc.sh", privileged: true

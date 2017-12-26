@@ -1,3 +1,15 @@
+apache:
+  image: chrisipa/apache:2.4
+  ports:
+    - 80:80
+    - 443:443
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
+    - /opt/lpsk/index.html:/var/www/html/index.html:ro
+    - /share:/var/www/html/share
+    - /exchange:/var/www/html/exchange
+
 lets-chat:
   image: sdelements/lets-chat:0.4.7
   links:
