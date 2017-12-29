@@ -7,8 +7,8 @@ apache:
     - /etc/localtime:/etc/localtime:ro
     - /etc/timezone:/etc/timezone:ro
     - /opt/lpsk/index.html:/var/www/html/index.html:ro
-    - /share:/var/www/html/share
-    - /exchange:/var/www/html/exchange
+    - /lpsk/share:/var/www/html/share
+    - /lpsk/exchange:/var/www/html/exchange
 
 lets-chat:
   image: sdelements/lets-chat:0.4.7
@@ -40,13 +40,12 @@ teamspeak:
     - 9987:9987/udp
     - 10011:10011
     - 30033:30033
-    - 41144:41144 
 
 samba:
   image: dperson/samba:latest
   volumes:
-    - /share:/share
-    - /exchange:/exchange
+    - /lpsk/share:/share
+    - /lpsk/exchange:/exchange
   ports:
     - 139:139
     - 445:445

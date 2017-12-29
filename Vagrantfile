@@ -1,6 +1,34 @@
-# set environment variables for lpsk folders
-LPSK_SHARE_FOLDER = ENV['LPSK_SHARE_FOLDER'] || 'C:\\Share'
-LPSK_EXCHANGE_FOLDER = ENV['LPSK_EXCHANGE_FOLDER'] || 'C:\\Exchange'
+# specify os constants
+module OS
+    def OS.windows?
+        (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.mac?
+        (/darwin/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.unix?
+        !OS.windows?
+    end
+
+    def OS.linux?
+        OS.unix? and not OS.mac?
+    end
+end
+
+# get data folder name
+if OS.windows?
+  dataFolderName = "lpsk"
+else
+  dataFolderName = ".lpsk"
+end    
+
+# get data folder path
+dataFolderPath = ENV['LPSK_DATA_FOLDER'] || File.join(ENV['HOME'], dataFolderName)
+
+# create data folder if not exists
+Dir.mkdir(dataFolderPath) unless File.exists?(dataFolderPath)
 
 Vagrant.configure("2") do |config|
 
@@ -17,8 +45,7 @@ Vagrant.configure("2") do |config|
   end  
 
   # specify synced folders with host
-  config.vm.synced_folder LPSK_SHARE_FOLDER, "/share"
-  config.vm.synced_folder LPSK_EXCHANGE_FOLDER, "/exchange"  
+  config.vm.synced_folder dataFolderPath, "/lpsk"
 
   # set hostname
   config.vm.hostname = "lan"
