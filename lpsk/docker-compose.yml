@@ -1,52 +1,55 @@
 apache:
-  image: chrisipa/apache:2.4
+  image: 'chrisipa/apache:2.4'
   ports:
-    - 80:80
-    - 443:443
+    - '80:80'
+    - '443:443'
   volumes:
-    - /etc/localtime:/etc/localtime:ro
-    - /etc/timezone:/etc/timezone:ro
-    - /opt/lpsk/index.html:/var/www/html/index.html:ro
-    - /lpsk/share:/var/www/html/share
-    - /lpsk/exchange:/var/www/html/exchange
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    - '/opt/lpsk/index.html:/var/www/html/index.html:ro'
+    - '/opt/lpsk/vhosts.conf:/etc/apache2/conf-enabled/vhosts.conf:ro'
+    - '/lpsk/share:/var/www/html/share'
+    - '/lpsk/exchange:/var/www/html/exchange'
 
 lets-chat:
-  image: sdelements/lets-chat:0.4.7
+  image: 'sdelements/lets-chat:0.4.7'
   links:
-    - mongo
+    - 'mongo'
   ports:
-    - 8080:8080
-    - 5222:5222
+    - '8080:8080'
+    - '5222:5222'
   volumes:
-    - /etc/localtime:/etc/localtime:ro
-    - /etc/timezone:/etc/timezone:ro
-    - /opt/lets-chat/config/settings.yml:/usr/src/app/settings.yml:ro
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    - '/opt/lets-chat/config/settings.yml:/usr/src/app/settings.yml:ro'
 
 mongo:
   image: mongo:3.4.10
   volumes:
-    - /etc/localtime:/etc/localtime:ro
-    - /etc/timezone:/etc/timezone:ro
-    - /opt/lets-chat/backup:/backup
-    - /opt/lets-chat/data:/data/db
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    - '/opt/lets-chat/backup:/backup'
+    - '/opt/lets-chat/data:/data/db'
   ports:
-    - 27017:27017
+    - '27017:27017'
 
 teamspeak:
-  image: mbentley/teamspeak:latest
+  image: 'mbentley/teamspeak:latest'
   volumes:
-    - /opt/teamspeak:/data
+    - '/opt/teamspeak:/data'
+  environment:
+    - 'TS3SERVER_LICENSE=accept'  
   ports:
-    - 9987:9987/udp
-    - 10011:10011
-    - 30033:30033
+    - '9987:9987/udp'
+    - '10011:10011'
+    - '30033:30033'
 
 samba:
-  image: dperson/samba:latest
+  image: 'dperson/samba:latest'
   volumes:
-    - /lpsk/share:/share
-    - /lpsk/exchange:/exchange
+    - '/lpsk/share:/share'
+    - '/lpsk/exchange:/exchange'
   ports:
-    - 139:139
-    - 445:445
-  command: -s "share;/share;yes;yes;yes" -s "exchange;/exchange;yes;no;yes" 
+    - '139:139'
+    - '445:445'
+  command: '-s "share;/share;yes;yes;yes" -s "exchange;/exchange;yes;no;yes"'

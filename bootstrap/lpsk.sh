@@ -12,6 +12,7 @@ sudo chown -R 503.503 /opt/teamspeak
 sudo mv /tmp/settings.yml /opt/lets-chat/config
 sudo mv /tmp/index.html /opt/lpsk
 sudo mv /tmp/docker-compose.yml /opt/lpsk
+sudo mv /tmp/vhosts.conf /opt/lpsk
 sudo mv /tmp/lpsk /etc/init.d/lpsk
 
 # make init script executable

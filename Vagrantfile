@@ -57,6 +57,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "lpsk/init/lpsk", destination: "/tmp/lpsk"
   config.vm.provision "file", source: "lpsk/index.html", destination: "/tmp/index.html"
   config.vm.provision "file", source: "lpsk/docker-compose.yml", destination: "/tmp/docker-compose.yml"  
+  config.vm.provision "file", source: "lpsk/vhosts.conf", destination: "/tmp/vhosts.conf"  
   config.vm.provision "file", source: "lets-chat/settings.yml", destination: "/tmp/settings.yml"
 
   # execute shell scripts in vm
